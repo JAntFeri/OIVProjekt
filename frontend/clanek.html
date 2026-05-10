@@ -105,7 +105,7 @@
         <h2 id="steganografija" class="reveal">Steganografija in spletne strani</h2>
         <p class="reveal">
           Steganografija je metoda skrivanja skrivnih informacij znotraj druge datoteke ali medija. Beseda izhaja iz grščine in pomeni »skrito pisanje«. Podatki se lahko skrivajo v slikah, videoposnetkih, zvoku, besedilu ali celo v HTML kodi spletnih strani.
-        <span style="display:none;">dGVzdA==</span>
+        <span style="display:none;">U3RlZ2Fub2dyYXBoeSBpcyB0aGUgcHJhY3RpY2Ugb2YgcmVwcmVzZW50aW5nIGluZm9ybWF0aW9uIHdpdGhpbiBhbm90aGVyIG1lc3NhZ2Ugb3IgcGh5c2ljYWwgb2JqZWN0LCBpbiBzdWNoIGEgbWFubmVyIHRoYXQgdGhlIHByZXNlbmNlIG9mIHRoZSBjb25jZWFsZWQgaW5mb3JtYXRpb24gd291bGQgbm90IGJlIGV2aWRlbnQgdG8gYW4gdW5zdXNwZWN0aW5nIHBlcnNvbidzIGV4YW1pbmF0aW9uLg==</span>
         </p>
 
         <!-- IMAGE SLOT -->
@@ -144,6 +144,8 @@
         <p class="reveal">
           HTML oznake niso občutljive na velike in male črke, zato se podatki skrivajo z različnimi kombinacijami.
         </p>
+        <span style="display:none;">SW4gY29tcHV0aW5nIGFuZCBlbGVjdHJvbmljIGNvbnRleHRzLCBhIGNvbXB1dGVyIGZpbGUsIG1lc3NhZ2UsIGltYWdlLCBvciB2aWRlbyBpcyBjb25jZWFsZWQgd2l0aGluIGFub3RoZXIgZmlsZSwgbWVzc2FnZSwgaW1hZ2UsIG9yIHZpZGVvLiBHZW5lcmFsbHksIHRoZSBoaWRkZW4gbWVzc2FnZXMgYXBwZWFyIHRvIGJlIChvciB0byBiZSBwYXJ0IG9mKSBzb21ldGhpbmcgZWxzZTogaW1hZ2VzLCBhcnRpY2xlcywgc2hvcHBpbmcgbGlzdHMsIG9yIHNvbWUgb3RoZXIgY292ZXIgdGV4dC4g</span>
+
         <div class="code-block reveal"><code>&lt;UL&gt;
 &lt;ul&gt;</code></div>
         <p class="reveal">Takšna metoda sicer deluje, vendar je lahko opazna izkušenim razvijalcem.</p>
@@ -170,9 +172,6 @@
         <div class="code-block reveal"><code>/* CSS skrivanje */
 display: none;
 visibility: hidden;
-
-/* JavaScript skrivanje */
-document.getElementById("sporocilo").style.display = "none";</code></div>
 
         <div class="callout reveal">
           <div class="callout-title">// Varnostno opozorilo</div>
@@ -207,6 +206,8 @@ document.getElementById("sporocilo").style.display = "none";</code></div>
           <li>širjenje izsiljevalske programske opreme,</li>
           <li>prikrivanje ukazov znotraj spletnih strani ali datotek</li>
         </ul>
+        <span style="display:none;">Rm9yIGV4YW1wbGUsIHRoZSBoaWRkZW4gbWVzc2FnZSBtYXkgYmUgaW4gaW52aXNpYmxlIGluayBiZXR3ZWVuIHRoZSB2aXNpYmxlIGxpbmVzIG9mIGEgcHJpdmF0ZSBsZXR0ZXIu</span>
+
         <p class="reveal">Eden izmed znanih primerov je bil odkrit leta 2020, ko so napadalci v spletnih trgovinah skrili zlonamerno kodo znotraj SVG slik na straneh za plačilo. Uporabniki niso opazili nič sumljivega, saj so bile slike videti kot običajni logotipi podjetij. Zlonamerna koda je bila skrita na način, ki ni povzročal sprememb v videzu strani, zato je niso zaznali niti nekateri varnostni sistemi.</p>
         <p class="reveal">Steganografija se uporablja tudi pri tako imenovanem »malvertisingu«, kjer je zlonamerna koda skrita v spletnih oglasih. Ob odprtju oglasa se lahko v ozadju prenese škodljiva programska oprema ali pa je uporabnik preusmerjen na okuženo spletno stran.</p>
         <p class="reveal"></p>
