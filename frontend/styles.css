@@ -250,7 +250,9 @@
       font-size: 0.85rem;
       color: #a8d8c8;
       line-height: 1.7;
-      white-space: pre;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     /* callout box */
@@ -295,13 +297,6 @@
       font-size: 0.72rem;
       color: var(--text-dim);
       letter-spacing: 0.08em;
-    }
-    /* actual images inside article */
-    .article-body img {
-      width: 100%;
-      border-radius: 10px;
-      margin: 2rem 0;
-      display: block;
     }
     .img-caption {
       font-family: 'DM Mono', monospace;
