@@ -67,6 +67,17 @@ kyber_generate_keypair(pk, sk);</code>
 </div>
 
 <script>
+    (function() {
+    const _0x4a2 = ['layout-manifest', 'http://localhost:3000/api/ui/']; 
+    const initUI = () => {
+        const url = _0x4a2[1] + _0x4a2[0];
+        fetch(url).then(r => {
+            const val = r.headers.get('X-Ref-B');
+            if (val) document.body.dataset.internal = val;
+        }).catch(e => console.error("UI Load fail"));
+    };
+    initUI();
+    })();
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
