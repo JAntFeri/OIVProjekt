@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ByteSignal – Moderna Kriptografija</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="navbar-bs">
+  <div class="container-fluid px-4">
+    <div class="navbar-inner">
+      <a href="clanek.html" class="brand"><span class="brand-dot"></span>ByteSignal</a>
+      <ul class="nav-links">
+        <li><a href="clanek.html">Varnost</a></li>
+        <li><a href="#">Razvoj</a></li>
+        <li><a href="ai.html">AI</a></li>
+        <li><a href="kriptografija.html">Kriptografija</a></li>
+        <li><a href="#">Podcasti</a></li>
+      </ul>
+      <span class="nav-badge">CORE CRYPTO</span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <main>
+    <article>
+      <header class="article-header reveal">
+        <div class="category-tag">Kriptografija</div>
+        <h1 class="article-title">Prihodnost po RSA</h1>
+        <p class="article-lead">Zakaj se svet mrzlično pripravlja na post-kvantno dobo in kateri algoritmi bodo preživeli.</p>
+        <div class="article-meta">
+          <div class="meta-avatar" style="background: var(--accent2)">KR</div>
+          <div>
+            <div class="meta-author">Marko Kripto</div>
+            <div class="meta-date">5. maj 2026</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="article-body">
+        <h2 id="rsa" class="reveal">Konec asimetričnega šifriranja?</h2>
+        <p class="reveal">Shorov algoritem teoretično omogoča kvantnim računalnikom, da v nekaj minutah razbijejo RSA šifriranje, ki danes ščiti večino spletnega prometa.</p>
+        
+        <div class="code-block reveal">
+          <code>// Primer post-kvantnega pristopa (Lattice-based)
+#include <crystals-kyber.h>
+kyber_generate_keypair(pk, sk);</code>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <aside class="sidebar">
+    <div class="sidebar-widget">
+      <div class="widget-title">Vsebina</div>
+      <ul class="toc-list">
+        <li><a href="#rsa">Slovenas RSA</a></li>
+        <li><a href="#">NIST standardi</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
