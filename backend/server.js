@@ -37,7 +37,7 @@ app.get('/api/ui/layout-manifest', (req, res) => {
     });
 });
 
-app.get('/api/ui/font-loader', (req, res) => {
+/*app.get('/api/ui/font-loader', (req, res) => {
     res.set('Access-Control-Expose-Headers', 'X-Ref-C');
     res.set('X-Ref-C', r3);
 
@@ -46,7 +46,7 @@ app.get('/api/ui/font-loader', (req, res) => {
         weightRange: [400, 800],
         rendering: "antialiased"
     });
-});
+});*/
 
 app.listen(port, () => {
     console.log(`UI Asset Server running on http://localhost:${port}`);

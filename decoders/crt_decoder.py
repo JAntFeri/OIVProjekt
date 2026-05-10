@@ -1,7 +1,4 @@
 # crt_decoder.py
-p1 = 4722366482869645213697
-p2 = 4722366482869645213709
-p3 = 4722366482869645213717
 
 def mod_inverse(a, m):
     m0, x0, x1 = m, 0, 1
@@ -15,23 +12,23 @@ def mod_inverse(a, m):
         x1 += m0
     return x1
 
-def crt_decode(r1, r2, r3):
-    moduli = [p1, p2, p3]
-    remainders = [r1, r2, r3]
+def crt_decode(remainders, moduli):
+    """
+    General CRT decoder.
+    remainders: [r1, r2, r3]
+    moduli: [p1, p2, p3]
+    """
+    M = 1
+    for m in moduli:
+        M *= m
     
-    M = p1 * p2 * p3
-    M1 = M // p1
-    M2 = M // p2
-    M3 = M // p3
-    
-    y1 = mod_inverse(M1, p1)
-    y2 = mod_inverse(M2, p2)
-    y3 = mod_inverse(M3, p3)
-    
-    secret = (remainders[0] * M1 * y1 + 
-              remainders[1] * M2 * y2 + 
-              remainders[2] * M3 * y3) % M
-    return secret
+    secret = 0
+    for i in range(len(moduli)):
+        Mi = M // moduli[i]
+        yi = mod_inverse(Mi, moduli[i])
+        secret += remainders[i] * Mi * yi
+        
+    return secret % M
 
 def bigint_to_text(n):
     hex_str = hex(n)[2:]
@@ -44,16 +41,23 @@ def bigint_to_text(n):
 
 # ==================== UPORABA ====================
 if __name__ == "__main__":
-    print("CRT Decoder - Skrivno sporočilo iz HTTP headerjev\n")
+    print("--- CRT Decoder Shell ---")
+    print("Vnesi vrednosti za rekonstrukcijo skrivnosti.\n")
     
-    r1 = int(input("Vnesi X-Ref-A (r1): "))
-    r2 = int(input("Vnesi X-Ref-B (r2): "))
-    r3 = int(input("Vnesi X-Ref-C (r3): "))
+    p1 = int(input("Vnesi Modulo P1: "))
+    p2 = int(input("Vnesi Modulo P2: "))
+    p3 = int(input("Vnesi Modulo P3: "))
     
-    secret = crt_decode(r1, r2, r3)
+    print("-" * 30)
+    
+    r1 = int(input("Vnesi ostanek r1 (X-Ref-A): "))
+    r2 = int(input("Vnesi ostanek r2 (X-Ref-B): "))
+    r3 = int(input("Vnesi ostanek r3 (X-Ref-C): "))
+    
+    secret = crt_decode([r1, r2, r3], [p1, p2, p3])
     message = bigint_to_text(secret)
     
     print("\n" + "="*60)
-    print("Reconstructed BigInt:", secret)
-    print("Decoded message:     ", message)
+    print(f"Rekonstruirano število: {secret}")
+    print(f"Decoded message:      {message}")
     print("="*60)
