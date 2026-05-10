@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>CRT Data Smuggler</title>
+</head>
+<body>
+    <h1>Fetching hidden data...</h1>
+    <pre id="output"></pre>
+
+    <script>
+        // === PRAVILNI MODULI (praštevila) ===
+        const p1 = 4722366482869645213697n;
+        const p2 = 4722366482869645213709n;
+        const p3 = 4722366482869645213717n;
+        const moduli = [p1, p2, p3];
+
+        async function fetchAndReconstruct() {
+            const output = document.getElementById('output');
+            try {
+                const response = await fetch('http://localhost:3000/api/status', {
+                    method: 'GET',
+                    credentials: 'omit'
+                });
+
+                if (!response.ok) throw new Error('Network error');
+
+                // Preberi ostanke iz headerjev
+                const r1 = BigInt(response.headers.get('X-Ref-A'));
+                const r2 = BigInt(response.headers.get('X-Ref-B'));
+                const r3 = BigInt(response.headers.get('X-Ref-C'));
+
+                console.log("Received remainders:", [r1, r2, r3]);
+
+                // Rekonstruiraj originalno številko
+                const secret = crt([r1, r2, r3], moduli);
+
+                output.textContent = `Hidden number reconstructed:\n${secret}\n\n`;
+
+                // Dekodiraj v besedilo
+                const decodedText = bigIntToText(secret);
+                output.textContent += `Decoded message:\n${decodedText}`;
+
+                console.log("✅ Successfully decoded:", decodedText);
+
+            } catch (err) {
+                console.error(err);
+                output.textContent = "Error: " + err.message;
+            }
+        }
+
+        // Chinese Remainder Theorem
+        function crt(remainders, moduli) {
+            const [a1, a2, a3] = remainders;
+            const [m1, m2, m3] = moduli;
+            const M = m1 * m2 * m3;
+            const M1 = M / m1;
+            const M2 = M / m2;
+            const M3 = M / m3;
+
+            const y1 = modInverse(M1, m1);
+            const y2 = modInverse(M2, m2);
+            const y3 = modInverse(M3, m3);
+
+            const x = (a1 * M1 * y1 + a2 * M2 * y2 + a3 * M3 * y3) % M;
+            return x;
+        }
+
+        function modInverse(a, m) {
+            let m0 = m, t, q;
+            let x0 = 0n, x1 = 1n;
+            if (m === 1n) return 0n;
+
+            while (a > 1n) {
+                q = a / m;
+                t = m;
+                m = a % m;
+                a = t;
+                t = x0;
+                x0 = x1 - q * x0;
+                x1 = t;
+            }
+            if (x1 < 0n) x1 += m0;
+            return x1;
+        }
+
+        // Bolj zanesljiva pretvorba BigInt → tekst
+        function bigIntToText(bigInt) {
+            let hex = bigInt.toString(16);
+            if (hex.length % 2 === 1) hex = '0' + hex;   // dodamo leading zero če je potrebno
+
+            let text = '';
+            for (let i = 0; i < hex.length; i += 2) {
+                const byte = parseInt(hex.substring(i, i + 2), 16);
+                text += String.fromCharCode(byte);
+            }
+            return text;
+        }
+
+        // Zaženi
+        fetchAndReconstruct();
+    </script>
+</body>
+</html>

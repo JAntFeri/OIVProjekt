@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ByteSignal – Umetna Inteligenca in Varnost</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="navbar-bs">
+  <div class="container-fluid px-4">
+    <div class="navbar-inner">
+      <a href="clanek.html" class="brand"><span class="brand-dot"></span>ByteSignal</a>
+      <ul class="nav-links">
+        <li><a href="clanek.html">Varnost</a></li>
+        <li><a href="#">Razvoj</a></li>
+        <li><a href="ai.html">AI</a></li>
+        <li><a href="kriptografija.html">Kriptografija</a></li>
+        <li><a href="#">Podcasti</a></li>
+      </ul>
+      <span class="nav-badge">AI LAB</span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <main>
+    <article>
+      <header class="article-header reveal">
+        <div class="category-tag">Umetna Inteligenca</div>
+        <h1 class="article-title">LLM in avtomatizacija napadov</h1>
+        <p class="article-lead">Kako generativni modeli spreminjajo pokrajino socialnega inženiringa in pisanja zlonamerne kode.</p>
+        <div class="article-meta">
+          <div class="meta-avatar" style="background: var(--accent)">AI</div>
+          <div>
+            <div class="meta-author">Uredniški odbor</div>
+            <div class="meta-date">8. maj 2026</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="article-body">
+        <p class="reveal">Z vzponom naprednih jezikovnih modelov so napadalci dobili orodje za ustvarjanje popolnih phishing elektronskih sporočil v katerem koli jeziku, brez slovničnih napak, ki so včasih izdale prevaro.</p>
+        
+        <h2 id="phishing" class="reveal">Personaliziran phishing na masovni ravni</h2>
+        <p class="reveal">AI omogoča analizo javno dostopnih podatkov o žrtvi in generiranje sporočil, ki so prilagojena njenemu slogu pisanja in interesom.</p>
+
+        <div class="img-slot reveal">
+          <span class="img-slot-label">// DIAGRAM: AI Phishing Pipeline</span>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <aside class="sidebar">
+    <div class="sidebar-widget">
+      <div class="widget-title">Sorodno</div>
+      <a class="related-item" href="kriptografija.html">
+        <div class="related-text">
+          <div class="related-cat">Kripto</div>
+          <div class="related-title">Kvantno varno šifriranje</div>
+        </div>
+      </a>
+    </div>
+  </aside>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
