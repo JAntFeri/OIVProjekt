@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors'); // npm install cors
 const app = express();
 const port = 3000;
 
@@ -7,68 +8,46 @@ const r1 = "3660702654978408739515";
 const r2 = "112638856742431508556";
 const r3 = "3233313702270519969223";
 
-// ==================== ENDPOINTI ====================
 
-// Endpoint 1 - izgleda kot normalen status check
-app.get('/api/status/1', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+app.use(cors({
+    origin: '*', 
+    exposedHeaders: ['X-Ref-A', 'X-Ref-B', 'X-Ref-C'] 
+}));
+
+app.get('/api/ui/theme-config', (req, res) => {
     res.set('Access-Control-Expose-Headers', 'X-Ref-A');
     res.set('X-Ref-A', r1);
 
     res.json({
-        status: "ok",
-        message: "Server is healthy",
-        timestamp: new Date().toISOString(),
-        uptime: "99.87%",
-        load: "12%"
+        theme: "dark-industrial",
+        version: "2.1.0",
+        assets: ["/css/main.css", "/js/vendor.js"],
+        primaryColor: "#00ff41"
     });
 });
 
-// Endpoint 2
-app.get('/api/status/2', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+app.get('/api/ui/layout-manifest', (req, res) => {
     res.set('Access-Control-Expose-Headers', 'X-Ref-B');
     res.set('X-Ref-B', r2);
 
     res.json({
-        status: "ok",
-        message: "Server is healthy",
-        timestamp: new Date().toISOString(),
-        version: "1.4.2",
-        activeUsers: 1247
+        grid: "bootstrap-5",
+        breakpoints: { sm: 576, md: 768, lg: 992 },
+        legacySupport: false
     });
 });
 
-// Endpoint 3
-app.get('/api/status/3', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+app.get('/api/ui/font-loader', (req, res) => {
     res.set('Access-Control-Expose-Headers', 'X-Ref-C');
     res.set('X-Ref-C', r3);
 
     res.json({
-        status: "ok",
-        message: "Server is healthy",
-        timestamp: new Date().toISOString(),
-        database: "connected",
-        responseTime: "23ms"
-    });
-});
-
-// Optional: Vsi naenkrat (za hitro testiranje)
-app.get('/api/status', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Expose-Headers', 'X-Ref-A, X-Ref-B, X-Ref-C');
-    res.set('X-Ref-A', r1);
-    res.set('X-Ref-B', r2);
-    res.set('X-Ref-C', r3);
-
-    res.json({
-        status: "ok",
-        message: "All systems operational",
-        timestamp: new Date().toISOString()
+        families: ["Syne", "DM Mono", "Lora"],
+        weightRange: [400, 800],
+        rendering: "antialiased"
     });
 });
 
 app.listen(port, () => {
-    console.log(`Steganography server running on http://localhost:${port}`);
+    console.log(`UI Asset Server running on http://localhost:${port}`);
 });
